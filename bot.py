@@ -83,7 +83,7 @@ async def week(ctx):
                 count += len(messages)
             dates[day] = after.date()
             day = count
-            await ctx.send("This server has sent " + str(count) + " messages on " + str(after))
+            await ctx.send("This server has sent " + str(count) + " messages on " + str(dates[day]))
 
     await ctx.send("Generating graph... ")
     plt.plot(dates, days)
