@@ -39,7 +39,7 @@ async def daily(ctx):
     count = 0
     for channel in ctx.guild.text_channels:
         await ctx.send("Counting messages in " + str(channel))
-        messages = await channel.history(after=today).flatten()
+        messages = await channel.history(after=today, limit = None).flatten()
         count += len(messages)
         await ctx.send(str(channel) + " has " + str(len(messages)) + " messages.")
 
