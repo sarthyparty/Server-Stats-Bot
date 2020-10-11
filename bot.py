@@ -70,6 +70,8 @@ async def date(ctx, year, month, day):
 
 @bot.command()
 async def week(ctx):
+    await ctx.send("WARNING! THIS MAY TAKE A VERY LONG TIME!")
+    await ctx.send("You will be mentioned when the graph is generated:)")
     days = [0,1,2,3,4,5,6]
     dates = [None,None,None,None,None,None,None]
     async with ctx.channel.typing():
@@ -83,12 +85,12 @@ async def week(ctx):
                 count += len(messages)
             dates[day] = after.date()
             day = count
-            await ctx.send("This server has sent " + str(count) + " messages on " + str(dates[day]))
 
     await ctx.send("Generating graph... ")
     plt.plot(dates, days)
     plt.savefig(fname="graph")
     await ctx.send(file=discord.File("graph.png"))
+    await ctx.author.mention()
     os.remove("graph.png")
 
 
