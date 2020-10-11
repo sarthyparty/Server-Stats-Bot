@@ -8,6 +8,12 @@ import discord
 
 import datetime
 
+import pytz
+
+import matplotlib.pyplot as plt
+
+import os
+
 bot = commands.Bot(command_prefix='*', description="Server stats bot")
 
 
@@ -36,7 +42,7 @@ async def hey(ctx):
 async def daily(ctx):
     async with ctx.channel.typing():
         my_date = datetime.date.today()
-        today = datetime.datetime(my_date.year, my_date.month, my_date.day)
+        today = datetime.datetime(my_date.year, my_date.month, my_date.day,0,0,0,0,pytz.CST)
         count = 0
         for channel in ctx.guild.text_channels:
             await ctx.send("Counting messages in " + str(channel))
@@ -51,8 +57,8 @@ async def daily(ctx):
 async def date(ctx, year, month, day):
     ctx.send("WARNING! THIS MAY TAKE A VERY LONG TIME. Please be patient:)")
     async with ctx.channel.typing():
-        after = datetime.datetime(int(year), int(month), int(day))
-        before = datetime.datetime(int(year), int(month), int(day) + 1)
+        after = datetime.datetime(int(year), int(month), int(day),0,0,0,0,pytz.CST)
+        before = datetime.datetime(int(year), int(month), int(day) + 1,0,0,0,0,pytz.CST)
         count = 0
         for channel in ctx.guild.text_channels:
             await ctx.send("Counting messages in " + str(channel))
@@ -65,17 +71,25 @@ async def date(ctx, year, month, day):
 @bot.command()
 async def week(ctx):
     days = [0,1,2,3,4,5,6]
+    dates = [None,None,None,None,None,None,None]
     async with ctx.channel.typing():
         for day in days:
-            date = datetime.date.today()
-            after = datetime.datetime(date.year, date.month, date.day - day)
-            before = datetime.datetime(date.year, date.month, date.day - day + 1)
+            date_ = datetime.date.today()
+            after = datetime.datetime(date_.year, date_.month, date_.day - day, 0, 0, 0, 0, pytz.CST)
+            before = datetime.datetime(date_.year, date_.month, date_.day - day + 1, 0, 0, 0, 0, pytz.CST)
             count = 0
             for channel in ctx.guild.text_channels:
                 messages = await channel.history(after=after, before=before, limit=None).flatten()
                 count += len(messages)
-
+            day = count
+            dates[day] = after.date()
             await ctx.send("This server has sent " + str(count) + " messages on " + str(after))
+
+    await ctx.send("Generating graph... ")
+    plt.plot(dates, days)
+    plt.save("graph.png")
+    await ctx.send(file=discord.File("graph.png"))
+    os.remove("graph.png")
 
 
 
