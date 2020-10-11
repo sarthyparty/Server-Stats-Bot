@@ -62,7 +62,7 @@ async def date(ctx, year, month, day):
 
         await ctx.send("This server has sent " + str(count) + " messages on " + str(after))
 
-
+@bot.command()
 async def week(ctx):
     days = [0,1,2,3,4,5,6]
     async with ctx.channel.typing():
