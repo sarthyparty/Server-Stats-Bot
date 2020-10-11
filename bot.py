@@ -84,13 +84,13 @@ async def week(ctx):
                 messages = await channel.history(after=after, before=before, limit=None).flatten()
                 count += len(messages)
             dates[day] = after.date()
-            day = count
+            days[day] = count
 
     await ctx.send("Generating graph... ")
     plt.plot(dates, days)
     plt.savefig(fname="graph")
     await ctx.send(file=discord.File("graph.png"))
-    await ctx.author.mention()
+    await ctx.send(ctx.author.mention())
     os.remove("graph.png")
 
 
