@@ -41,9 +41,9 @@ async def daily(ctx):
         await ctx.send("Counting messages in " + str(channel))
         messages = await channel.history(after=today).flatten()
         count += len(messages)
-        await ctx.send(str(channel) + " has " + len(messages) + " messages.")
+        await ctx.send(str(channel) + " has " + str(len(messages)) + " messages.")
 
-    await ctx.send("This server has sent " + count + " messages today.")
+    await ctx.send("This server has sent " + str(count) + " messages today.")
 
 
 bot.run(TOKEN)
