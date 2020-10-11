@@ -118,7 +118,7 @@ async def graph(ctx, Days):
             days[day] = count
 
     await ctx.send("Generating graph... ")
-    plt.xticks([dates[0].date(), dates[-1].date()], visible=True, rotation="horizontal")
+    plt.xticks([dates[0], dates[-1]], visible=True, rotation="horizontal")
     plt.plot(dates, days)
     plt.savefig(fname="graph")
     await ctx.send(file=discord.File("graph.png"))
