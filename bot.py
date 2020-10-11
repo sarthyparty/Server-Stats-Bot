@@ -34,7 +34,8 @@ async def hey(ctx):
 
 @bot.command()
 async def daily(ctx):
-    today = datetime.date.today()
+    my_date = datetime.date.today()
+    today = datetime.datetime(my_date.year, my_date.month, my_date.day)
     count = 0
     for channel in ctx.guild.text_channels:
         await ctx.send("Counting messages in " + str(channel))
