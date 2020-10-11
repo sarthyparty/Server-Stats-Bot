@@ -45,6 +45,7 @@ async def daily(ctx):
 
     await ctx.send("This server has sent " + str(count) + " messages today.")
 
+
 @bot.command()
 async def date(ctx, year, month, day):
     after = datetime.datetime(int(year), int(month), int(day))
@@ -52,7 +53,7 @@ async def date(ctx, year, month, day):
     count = 0
     for channel in ctx.guild.text_channels:
         await ctx.send("Counting messages in " + str(channel))
-        messages = await channel.history(after=after, before=before).flatten()
+        messages = await channel.history(after=after, before=before, limit=None).flatten()
         count += len(messages)
         await ctx.send(str(channel) + " has " + str(len(messages)) + " messages.")
 
