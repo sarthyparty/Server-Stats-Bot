@@ -76,7 +76,7 @@ async def week(ctx):
         for day in days:
             date_ = datetime.date.today()
             after = datetime.datetime(date_.year, date_.month, date_.day - day, 0, 0, 0, 0, pytz.CST)
-            before = datetime.datetime(date_.year, date_.month, date_.day - day + 1, 0, 0, 0, 0, pytz.CST)
+            before = datetime.datetime(date_.year, date_.month, date_.day - day + 1, 0, 0, 0, 0, pytz.timezone("CET"))
             count = 0
             for channel in ctx.guild.text_channels:
                 messages = await channel.history(after=after, before=before, limit=None).flatten()
