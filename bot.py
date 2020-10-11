@@ -75,14 +75,14 @@ async def week(ctx):
     async with ctx.channel.typing():
         for day in days:
             date_ = datetime.date.today()
-            after = datetime.datetime(date_.year, date_.month, date_.day - day, 0, 0, 0, 0, pytz.timezone("CET"))
-            before = datetime.datetime(date_.year, date_.month, date_.day - day + 1, 0, 0, 0, 0, pytz.timezone("CET"))
+            after = datetime.datetime(date_.year, date_.month, date_.day - day)
+            before = datetime.datetime(date_.year, date_.month, date_.day - day + 1)
             count = 0
             for channel in ctx.guild.text_channels:
                 messages = await channel.history(after=after, before=before, limit=None).flatten()
                 count += len(messages)
-            day = count
             dates[day] = after.date()
+            day = count
             await ctx.send("This server has sent " + str(count) + " messages on " + str(after))
 
     await ctx.send("Generating graph... ")
