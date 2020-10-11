@@ -96,13 +96,13 @@ async def week(ctx):
 
 
 @bot.command()
-async def graph(ctx, days):
+async def graph(ctx, Days):
     await ctx.send("WARNING! THIS MAY TAKE A VERY LONG TIME!")
     await ctx.send("You will be mentioned when the graph is generated:)")
     days = []
     dates = []
 
-    for i in range(0, days):
+    for i in range(0, int(Days)):
         days.append(i)
         dates.append(None)
     async with ctx.channel.typing():
