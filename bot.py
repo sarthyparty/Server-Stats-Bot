@@ -42,7 +42,7 @@ async def hey(ctx):
 async def daily(ctx):
     async with ctx.channel.typing():
         my_date = datetime.date.today()
-        today = datetime.datetime(my_date.year, my_date.month, my_date.day, 0, 0, 0, 0, pytz.timezone("CET"))
+        today = datetime.datetime(my_date.year, my_date.month, my_date.day)
         count = 0
         for channel in ctx.guild.text_channels:
             await ctx.send("Counting messages in " + str(channel))
@@ -57,8 +57,8 @@ async def daily(ctx):
 async def date(ctx, year, month, day):
     ctx.send("WARNING! THIS MAY TAKE A VERY LONG TIME. Please be patient:)")
     async with ctx.channel.typing():
-        after = datetime.datetime(int(year), int(month), int(day), 0, 0, 0, 0, pytz.timezone("CET"))
-        before = datetime.datetime(int(year), int(month), int(day) + 1, 0, 0, 0, 0, pytz.timezone("CET"))
+        after = datetime.datetime(int(year), int(month), int(day))
+        before = datetime.datetime(int(year), int(month), int(day) + 1)
         count = 0
         for channel in ctx.guild.text_channels:
             await ctx.send("Counting messages in " + str(channel))
