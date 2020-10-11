@@ -48,6 +48,8 @@ async def daily(ctx):
 
 @bot.command()
 async def date(ctx, year, month, day):
+
+    ctx.send("WARNING! THIS TAKES A VERY LONG TIME. Please be patient:)")
     async with ctx.channel.typing():
         after = datetime.datetime(int(year), int(month), int(day))
         before = datetime.datetime(int(year), int(month), int(day) + 1)
