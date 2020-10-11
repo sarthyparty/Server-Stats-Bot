@@ -56,7 +56,7 @@ async def date(ctx, year, month, day):
         count += len(messages)
         await ctx.send(str(channel) + " has " + str(len(messages)) + " messages.")
 
-    await ctx.send("This server has sent " + str(count) + " messages today.")
+    await ctx.send("This server has sent " + str(count) + " messages on " + str(after))
 
 
 bot.run(TOKEN)
