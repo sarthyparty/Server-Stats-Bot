@@ -87,7 +87,7 @@ async def week(ctx):
 
     await ctx.send("Generating graph... ")
     plt.plot(dates, days)
-    plt.save("graph.png")
+    plt.savefig(fname="graph")
     await ctx.send(file=discord.File("graph.png"))
     os.remove("graph.png")
 
