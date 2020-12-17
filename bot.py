@@ -31,7 +31,7 @@ async def hey(ctx):
 
 
 @bot.command()
-async def graph(ctx, func):
+async def graphit(ctx, func):
     func = func.replace('^', '**')
     x_values = []
     y_values = []
