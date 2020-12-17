@@ -1,1 +1,1 @@
-TOKEN = '<inset token here>'
+TOKEN = 'new token'
