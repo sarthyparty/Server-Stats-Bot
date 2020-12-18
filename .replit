@@ -1,2 +1,2 @@
 language = "python3"
-run = "pip install discord pandas matplotlib&&python bot.py"
+run = "pip install discord pandas seaborn matplotlib&&python bot.py"
