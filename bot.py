@@ -1,13 +1,12 @@
 from dtoken import TOKEN
 from discord.ext import commands
 import discord
-import datetime
 import matplotlib.pyplot as plt
 import os
 import pandas as pd
 import seaborn as sns
 
-bot = commands.Bot(command_prefix='*', description="Server stats bot")
+bot = commands.Bot(command_prefix='*', description="data graphing bot")
 df = pd.read_csv('college_data.csv', index_col = 0)
 
 
