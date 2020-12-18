@@ -8,7 +8,7 @@ import pandas as pd
 import seaborn as sns
 
 bot = commands.Bot(command_prefix='*', description="Server stats bot")
-df = pd.read_csv('college_data.csv', )
+df = pd.read_csv('college_data.csv', index_col = 0)
 
 
 @bot.event
@@ -92,9 +92,23 @@ async def distplot(ctx, column):
   else:
     await ctx.send("The column was not in the dataframe or it was not a numerical column")
 
+@bot.command()
+async def catplot(ctx):
+  plt.figure(figsize=(16,16))
+  sns.catplot(x='Private',y='Enroll',data=df,kind='bar')
+  plt.savefig(fname="graph")
+  await ctx.send(file=discord.File("graph.png"))
+  os.remove("graph.png")
+  plt.clf()
 
-
-  
+@bot.command()
+async def regression(ctx):
+  plt.figure(figsize=(10,12))
+  sns.lmplot(x='Accept', y='Outstate', data=df, hue='Private', palette='rainbow')
+  plt.savefig(fname="graph")
+  await ctx.send(file=discord.File("graph.png"))
+  os.remove("graph.png")
+  plt.clf()
 
 # @bot.command()
 # async def daily(ctx):
